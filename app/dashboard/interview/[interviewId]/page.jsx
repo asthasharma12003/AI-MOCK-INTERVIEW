@@ -1,32 +1,32 @@
 "use client";
+
 import { db } from "@/utils/db";
 import { MockInterview } from "@/utils/schema";
 import { eq } from "drizzle-orm";
 import { Lightbulb, WebcamIcon } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Button } from "@/components/ui/button";
 import Webcam from "react-webcam";
 import Link from "next/link";
-import { useContext } from 'react';
 import { WebCamContext } from "../../layout";
 
-const Interview = ({ params }) => {
+const Interview = ({ interviewId }) => {
   const { webCamEnabled, setWebCamEnabled } = useContext(WebCamContext);
   const [interviewData, setInterviewData] = useState();
-  // const [webCamEnabled, setWebCamEnebled] = useState(false);
+
   useEffect(() => {
-    console.log(params.interviewId);
+    console.log("Interview ID:", interviewId);
     GetInterviewDetails();
-  }, []);
-  
+  }, [interviewId]);
+
   const GetInterviewDetails = async () => {
     const result = await db
       .select()
       .from(MockInterview)
-      .where(eq(MockInterview.mockId, params.interviewId));
-      
+      .where(eq(MockInterview.mockId, interviewId));
     setInterviewData(result[0]);
   };
+
   return (
     <div className="my-10">
       <h2 className="font-bold text-2xl text-center">Let's Get Started</h2>
@@ -83,7 +83,7 @@ const Interview = ({ params }) => {
         </div>
       </div>
       <div className="flex justify-center my-4 md:my-0 md:justify-end md:items-end">
-        <Link href={"/dashboard/interview/" + params.interviewId + "/start"}>
+        <Link href={`/dashboard/interview/${interviewId}/start`}>
           <Button>Start Interview</Button>
         </Link>
       </div>
