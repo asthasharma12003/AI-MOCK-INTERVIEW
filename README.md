@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AI-Powered Mock Interview Platform
 
 ## Description
@@ -61,3 +62,6 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 ## Support
 
 Show your support by 🌟 the project!!
+=======
+# AI-MOCK-INTERVIEW
+>>>>>>> 3dcfc043d4f3249d681800881624586ca2e8a24d
